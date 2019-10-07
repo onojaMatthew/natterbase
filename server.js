@@ -34,6 +34,9 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   res.json({ message: "Congrats! Your first project" });
 });
+
+// custom routes
+require("./middleware/routes")(app);
   
 // Starting and listening to server
 app.listen(port, () => {
