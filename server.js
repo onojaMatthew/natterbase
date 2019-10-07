@@ -1,17 +1,21 @@
 const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
+const database = require("./config/db");
 const validator = require("express-validator");
 const app = express();
 
 const port = process.env.PORT || 5000;
 
-app.use(express.static(__dirname));
+// connecting to database
+database();
 
+// Setting up middleware
+app.use(express.static(__dirname));
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(validator());
+// app.use(validator());
 
 //implementing cross origin resourse sharing
 app.use((req, res, next) => {
@@ -26,23 +30,18 @@ app.use((req, res, next) => {
         next();
     }
 });
-
-app.use((err, req, res, next) => {
-    if (err.name === "UnauthorizedError") {
-      res.status(401).json({
-        error: "You must be logged in to perform this operation"
-      })
-    }
-});
   
 app.get("/", (req, res) => {
-  res.json({ message: "Congrats! Your first project"});
+  res.json({ message: "Congrats! Your first project" });
 });
   
-  // Starting and listening to server
+// Starting and listening to server
 app.listen(port, () => {
   console.log(`Server is up and running on port ${port}`);
 });
+
 // y
 // t
 // T
+// onojamatthew59@gmail.com
+// igochemat7@@
