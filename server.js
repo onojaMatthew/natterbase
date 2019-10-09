@@ -33,12 +33,14 @@ app.use((req, res, next) => {
 });
   
 app.get("/", (req, res) => {
-  res.json({ message: "Congrats! Your first project" });
+  res.json( { message: "Congrats! Welcome to Natterbase index API" });
 });
 
-// Error logger
+// Creates a logFile.log file and logs unhandleRejection and uncaughtException errors to it. Errors are also logged
+// to the same files in the database
 require( "./config/error-logger" )();
-
+// helmet and compression middleware connection
+require( "./config/prod" )( app );
 // custom routes
 require("./middleware/routes")(app);
   
@@ -60,33 +62,4 @@ module.exports = app;
 // onojamatthew59@gmail.com
 // igochemat7@@
 
-//prd se
-// const helmet = require( 'helmet' );
-// const compression = require( 'compression' );
 
-// module.exports = function ( app ) {
-//   app.use( helmet() );
-//   app.use( compression() );
-// }
-
-// const winston = require( 'winston' );
-// const config = require( 'config' );
-// require( 'winston-mongodb' );
-// require( 'express-async-errors' );
-
-// module.exports = function () {
-//   winston.handleExceptions(
-//     new winston.transports.File( { filename: 'uncaughtException.log' } ),
-//     new winston.transports.Console( { colorize: true, prettyPrint: true } )
-//   )
-
-//   process.on( 'unhandledRejection', ( ex ) => {
-//     throw ex;
-//   } );
-
-//   winston.add( winston.transports.File, { filename: 'logFile.log' } );
-//   winston.add( winston.transports.MongoDB, {
-//     db: config.get( 'dbUrl' ),
-//     level: 'info'
-//   } );
-// }

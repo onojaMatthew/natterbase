@@ -1,45 +1,17 @@
-// const { check, validationResult } = require('express-validator');
+// =========================================================================
+// Handles input validation and check that no input field is submitted empty
+// =========================================================================
 
 exports.testValidator = (req, res, next) => {
-  req.check( "type", "type is required" )
-    .notEmpty()
-    .isLength({
-      min: 4,
-      max: 32
-    })
-    .withMessage( "type must be at least 4 characters long" );
+  req.check( "type", "type is required" ).notEmpty();
+  req.check( "crux", "Crux is required" ).notEmpty();
+  req.check( "color", "Color is required" ).notEmpty();
+  req.check( "title", "title is required" ).notEmpty();
+    
+  const errors = req.validationErrors();
   
-  req.check( "crux", "Crux is required" )
-    .notEmpty()
-    .isLength( {
-      min: 4,
-      max: 32
-    } )
-    .withMessage( "Crux must be at least 4 characters long" );
-  
-  req.check( "color", "Color is required" )
-    .notEmpty()
-    .isLength( {
-      min: 3,
-      max: 32
-    } )
-    .withMessage( "Colro must be at least 4 characters long" );
-  req.check( "title", "title is required" )
-    .notEmpty()
-    .isLength( {
-      min: 4,
-      max: 32
-    } )
-    .withMessage( "title must be at least 4 characters long" );
-  
-    const errors = req.validationErrors();
-  
-    // const errors = validationResult();
+  // We first check for errors. If there is return status code of 400 and the error messages
     if (errors) {
-      // const firstError = errors.map((error) => error.msg)[0];
-      // return res.status(400).json({
-      //   error: firstError
-      // })
       return res.status(400).json({ error: errors });
     }
   

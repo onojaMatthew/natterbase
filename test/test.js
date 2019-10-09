@@ -15,7 +15,7 @@ describe( "Natterbase route", () => {
       request( app )
         .post( '/api/v1/create' )
         .send( {
-          type: "durban",
+          type: "Durban",
           crux: "Indices",
           color: "Green",
           title: "Indicted idiot"
@@ -24,21 +24,20 @@ describe( "Natterbase route", () => {
           data = res.body
           expect( res.status ).to.eq( 200 );
           expect( res.body.type ).to.eq( 'Durban' );
-          done()
-        } )
-    } )
+          done();
+        } );
+    } );
     
     describe( "Should delete a natterbase", () => {
-      it( "Delete a natterbase", ( done ) => {
+      it( "natterbase delete", ( done ) => {
         request( app )
-          .delete( `/api/v1/delete/${ data.type}` )
+          .delete( `/api/v1/delete/${ data.type }` )
           .end( ( err, res ) => {
             expect( res.status ).to.eq( 200 );
             expect( res.body ).to.be.an( "object" );
-            done()
-          })
-      } )
-    })
-    
-  })
-} )
+            done();
+          } );
+      } );
+    } );
+  } );
+} );

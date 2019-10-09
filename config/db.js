@@ -1,20 +1,21 @@
 const mongoose = require( "mongoose" );
 const winston = require( "winston" );
+const keys = require( "./keys" );
 
 require("dotenv").config();
 
-let db_url;
-const env = process.env.NODE_ENV || 'development';
-if ( env === 'test' ) {
-  db_url = process.env.TEST_DB;
-} else {
-  db_url = process.env.TEST_DB;
-}
+// let db_url;
+// const env = process.env.NODE_ENV || 'development';
+// if ( env === 'test' ) {
+//   db_url = process.env.TEST_DB;
+// } else {
+//   db_url = process.env.DB_PROD;
+// }
 
 
 module.exports = () => {
   mongoose.Promise = global.Promise;
-  mongoose.connect(`${db_url}`, {
+  mongoose.connect( `${keys.MONGODB_URL}`, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
