@@ -1,21 +1,22 @@
 const mongoose = require( "mongoose" );
 const winston = require( "winston" );
-const keys = require( "./keys" );
-
 require("dotenv").config();
 
-// let db_url;
-// const env = process.env.NODE_ENV || 'development';
-// if ( env === 'test' ) {
-//   db_url = process.env.TEST_DB;
-// } else {
-//   db_url = process.env.DB_PROD;
-// }
+let db_url;
+const env = process.env.NODE_ENV || 'development';
+if ( env === 'test' ) {
+  db_url = process.env.TEST_DB;
+} else if ( env === "development" ) {
+  db_url = process.env.DEV_DB;
+} else {
+  db_url = process.env.DB_PROD;
+}
 
+// Datbase configuration
 
 module.exports = () => {
   mongoose.Promise = global.Promise;
-  mongoose.connect( `${keys.MONGODB_URL}`, {
+  mongoose.connect( `${db_url}`, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,

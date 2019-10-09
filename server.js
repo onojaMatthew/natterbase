@@ -55,11 +55,3 @@ app.listen( port, ( err ) => {
 
 module.exports = app;
 
-
-// y
-// t
-// T
-// onojamatthew59@gmail.com
-// igochemat7@@
-
-

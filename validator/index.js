@@ -3,10 +3,10 @@
 // =========================================================================
 
 exports.testValidator = (req, res, next) => {
-  req.check( "type", "type is required" ).notEmpty();
+  req.check( "type", "Type is required" ).notEmpty();
   req.check( "crux", "Crux is required" ).notEmpty();
   req.check( "color", "Color is required" ).notEmpty();
-  req.check( "title", "title is required" ).notEmpty();
+  req.check( "title", "Title is required" ).notEmpty();
     
   const errors = req.validationErrors();
   
